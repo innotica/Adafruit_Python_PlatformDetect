@@ -272,6 +272,12 @@ class Chip:
         if self.detector.check_dt_compatible_value("libretech,aml-s905x-cc"):
             return chips.S905X
 
+        if self.detector.check_dt_compatible_value("s5p4418"):
+            return chips.S5P4418
+
+        if self.detector.check_dt_compatible_value("s5p6818"):
+            return chips.S5P6818
+
         linux_id = None
         hardware = self.detector.get_cpuinfo_field("Hardware")
 

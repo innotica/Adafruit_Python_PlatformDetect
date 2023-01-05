@@ -83,6 +83,10 @@ class Board:
             board_id = self._imx8mx_id()
         elif chip_id == chips.IMX6ULL:
             board_id = self._imx6ull_id()
+        elif chip_id == chips.S5P4418:
+            board_id = boards.CANIS_V1
+        elif chip_id == chips.S5P6818:
+            board_id = boards.CANIS_V1
         elif chip_id == chips.S905Y2:
             board_id = boards.RADXA_ZERO
         elif chip_id == chips.ESP8266:
@@ -639,6 +643,11 @@ class Board:
         return self.id in boards._NANOPI_IDS
 
     @property
+    def any_canis(self) -> bool:
+        """Check whether the current board is any defined Canis."""
+        return self.id in boards._CANIS_IDS
+
+    @property
     def any_96boards(self) -> bool:
         """Check whether the current board is any 96boards board."""
         return self.id in boards._LINARO_96BOARDS_IDS
@@ -807,6 +816,7 @@ class Board:
             yield self.any_beaglebone
             yield self.any_orange_pi
             yield self.any_nanopi
+            yield self.any_canis
             yield self.any_giant_board
             yield self.any_jetson_board
             yield self.any_coral_board
@@ -894,6 +904,11 @@ class Board:
     def greatfet_one(self) -> bool:
         """Check whether the current board is a GreatFET One."""
         return self.id == boards.GREATFET_ONE
+
+    @property
+    def aml_s905x_cc(self) -> bool:
+        """Check whether the current board is a aml-s905x-cc One."""
+        return self.id == boards.AML_S905X_CC
 
     def __getattr__(self, attr: str) -> bool:
         """
